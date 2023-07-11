@@ -32,13 +32,28 @@ function Task(props) {
 function List(props) {
 
 	const [newTask, setNewTask] = useState("");
-
+  
 	function onChange(event) {
-		setNewTask(event.target.value);
+	  setNewTask(event.target.value);
 	}
-
+  
 	function onClick() {
-		props.setTasks(tasks => [...tasks, { id: tasks.length + 1, description: newTask, completed: false }]);
+		fetch('http://localhost:5000/tasks', {
+			method: 'POST',
+			headers: {
+			'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ description: newTask, completed: false })
+		})
+			.then(response => response.json())
+			.then(data => {
+				props.setTasks(tasks => [...tasks, data]);
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+			});
+  
+	  	setNewTask("");  // Clear the input field
 	}
 
 	return (
