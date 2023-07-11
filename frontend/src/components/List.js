@@ -34,9 +34,17 @@ function Task(props) {
     }
 
 	function onClick() {
-		// Find the task we want to delete and remove it
-		props.setTasks(tasks => tasks.filter(task => task.id !== props.id));
-	}
+        fetch(`http://localhost:5000/tasks/${props.id}`, {
+            method: 'DELETE',
+        })
+        .then(() => {
+            // remove it from the state
+            props.setTasks(tasks => tasks.filter(task => task.id !== props.id));
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
 
 	return (
 		<li><button type="button" onClick={onClick}>X</button> { props.description } <input type="checkbox" checked={props.completed} onChange={onChange}/></li>
