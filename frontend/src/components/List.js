@@ -11,7 +11,7 @@ function Task(props) {
             completed: !props.completed
         };
 
-        fetch(`http://localhost:5000/tasks/${props.id}`, {
+        fetch(`http://localhost/api/tasks/${props.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ function Task(props) {
     }
 
 	function onClick() {
-        fetch(`http://localhost:5000/tasks/${props.id}`, {
+        fetch(`http://localhost/api/tasks/${props.id}`, {
             method: 'DELETE',
         })
         .then(() => {
@@ -60,7 +60,7 @@ function List(props) {
 	}
   
 	function onClick() {
-		fetch('http://localhost:5000/tasks', {
+		fetch('http://localhost/api/tasks', {
 			method: 'POST',
 			headers: {
 			'Content-Type': 'application/json'

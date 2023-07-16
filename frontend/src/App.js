@@ -7,7 +7,7 @@ function App() {
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/tasks')
+        fetch('http://localhost/api/tasks')
             .then(response => response.json())
             .then(data => setTasks(data))
             .catch((error) => {
